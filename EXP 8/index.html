@@ -1,0 +1,33 @@
+<html> 
+<head> 
+<title>Factorial Calculator</title> 
+</head> 
+<body> 
+<h1>Factorial Calculator</h1> 
+<form method="post" action="factorial.jsp"> 
+Enter a number: <input type="text" name="num"> 
+<input type="submit" value="Calculate"> 
+</form> 
+</body> 
+</html> 
+Factorial.jsp 
+<html> 
+<head> 
+<title>Factorial Result</title> 
+</head> 
+<body> 
+<h1>Factorial Result</h1> 
+<% 
+// Get the number input from the form 
+int num = Integer.parseInt(request.getParameter("num")); 
+// Calculate the factorial value 
+int fact = 1; 
+for (int i = 1; i <= num; i++) { 
+fact *= i; 
+} 
+// Display the result 
+out.println("<p>The factorial of " + num + " is " + fact + ".</p>"); 
+%> 
+</body> 
+</html>
+
