@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+<title>Login Page</title>
+<style>
+body {
+background-color: #f5f5f5;
+font-family: Arial, sans-serif;
+color: #333;
+}
+form {
+display: flex;
+flex-direction: column;
+align-items: center;
+margin-top: 50px;
+background-color: #fff;
+padding: 20px;
+border-radius: 10px;
+box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+label {
+margin-top: 10px;
+margin-bottom: 5px;
+font-weight: bold;
+font-size: 16px;
+color: #666;
+}
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+padding: 10px;
+font-size: 16px;
+border-radius: 5px;
+border: 1px solid #ccc;
+width: 300px;
+margin-bottom: 15px;
+background-color: #f7f7f7;
+color: #333;
+}
+input[type="submit"] {
+background-color: #3bb3e0;
+color: #fff;
+padding: 10px 20px;
+font-size: 16px;
+border-radius: 5px;
+border: none;
+cursor: pointer;
+transition: background-color 0.3s ease-in-out;
+
+}
+input[type="submit"]:hover {
+background-color: #2a8db2;
+}
+.error {
+color: red;
+margin-top: 5px;
+margin-bottom: 10px;
+}
+</style>
+<script
+src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+<script>
+var app = angular.module('myApp', []);
+app.controller('loginCtrl', function($scope) {
+$scope.submitForm = function() {
+var errors = [];
+if (!$scope.name) {
+errors.push("Name is required");
+} else if ($scope.name.length < 3 || $scope.name.length > 8) {
+errors.push("Name length must be between 3 and 8");
+}
+if (!isValidEmail($scope.username)) {
+errors.push("Username should be a valid email");
+}
+if (!$scope.password || $scope.password.length < 6) {
+errors.push("Password must be at least 6 characters");
+}
+if (errors.length > 0) {
+$scope.errors = errors;
+} else {
+// Validation successful, process the login here
+}
+};
+function isValidEmail(email) {
+var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+return emailRegex.test(email);
+}
+});
+</script>
+</head>
+<body ng-controller="loginCtrl">
+
+<form ng-submit="submitForm()">
+<label for="name">Name:</label>
+<input type="text" id="name" name="name" ng-model="name" required
+
+minlength="3" maxlength="8">
+
+<label for="username">Username:</label>
+<input type="email" id="username" name="username" ng-model="username"
+
+required>
+
+<label for="password">Password:</label>
+<input type="password" id="password" name="password" ng-model="password"
+
+required minlength="6">
+
+<input type="submit" value="Login">
+</form>
+<div class="error" ng-show="errors">
+<p ng-repeat="error in errors">{{ error }}</p>
+</div>
+</body>
+</html>
