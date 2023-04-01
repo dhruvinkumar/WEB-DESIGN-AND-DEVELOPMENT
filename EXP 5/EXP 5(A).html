@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exp 5</title>
+<style>
+*{
+padding: 10px;
+font-size: 15px;
+}
+</style>
+</head>
+<body>
+<form name="basicForm" onsubmit="return formValidator()">
+<label for="name">Name</label>
+<input type="text" name="name" id="nameInput" required> <br>
+
+<label for="password">Password</label>
+<input type="password" name="password" id="passwordInput" required> <br>
+
+<label for="email">Email</label>
+<input type="email" name="email" id="emailInput" required> <br>
+
+<label for="phno">Phone No.</label>
+<input type="number" name="phno" id="phoneNumberInput" required> <br>
+
+<input type="submit" value="Submit">
+</form>
+
+<script>
+function formValidator() {
+let form = document.forms['basicForm'];
+let name = form['name'].value;
+
+if (name.length <= 6 || !name.trim().match(/^[a-zA-Z]+$/)) {
+alert("Name must be alphabetic and greater than 6 characters in length");
+
+return false;
+}
+
+let password = form['password'].value
+if (password.length < 6) {
+alert("Password must be at least 6 characters in length");
+return false;
+}
+
+let phno = form['phno'].value
+if (phno.length != 10) {
+alert("Phone number must be exactly 10 numbers in length");
+return false;
+}
+
+}
+</script>
+</body>
+</html>
